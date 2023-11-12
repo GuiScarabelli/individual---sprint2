@@ -1,0 +1,5 @@
+FROM openjdk:17
+
+COPY individual---sprint2/teste-looca - arquivo p teste/target/teste-looca-1.0-SNAPSHOT-jar-with-dependencies
+
+ENTRYPOINT ["java", "-jar", "/teste-looca.jar"]

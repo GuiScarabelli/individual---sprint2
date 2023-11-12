@@ -81,8 +81,6 @@ public class App {
         computador.setQtdDiscos(qtdDicos);
 
         do {
-            ComputadorDAO.cadastrarComputador(computador);
-            ComputadorDAO.pegarIdComputador(computador);
             UsuarioDAO.pegarUsuario(usuario);
             System.out.println("Digite o usuario: ");
             String emailLogin = entrada.nextLine();

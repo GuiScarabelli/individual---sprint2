@@ -29,6 +29,7 @@
             <version>8.0.28</version>
         </dependency>
     </dependencies>
+    <build>
     <plugins>
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -39,7 +40,7 @@
                     </descriptorRefs>
                     <archive>
                         <manifest>
-                            <mainClass>com.eigtech.dataguard.Main</mainClass>
+                            <mainClass>App</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
@@ -54,4 +55,5 @@
                 </executions>
             </plugin>
         </plugins>
+    </build>
 </project>

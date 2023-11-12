@@ -23,7 +23,7 @@ else
 fi
 
 # Baixa o arquivo .jar do meu grupo de PI
-curl -O -L "https://github.com/GuiScarabelli/individual---sprint2/raw/main/teste-looca%20-%20arquivo%20p%20teste/out/artifacts/teste_looca_jar/teste-looca.jar"
+wget -O "https://github.com/GuiScarabelli/individual---sprint2/raw/main/teste-looca%20-%20arquivo%20p%20teste/out/artifacts/teste_looca_jar/teste-looca.jar"
 
 # Executa o arquivo .jar do meu grupo de PI
 java -jar teste-looca.jar

@@ -6,9 +6,9 @@ sudo apt update && sudo apt upgrade
 # Verifica a versão do Java
 java -version
 
-sudo apt update && sudo apt upgrade –y
+sudo apt update
 
-sudo apt install docker.io
+sudo apt install docker.io -y
 
 sudo systemctl start docker
 
@@ -36,4 +36,4 @@ curl -O -L "https://github.com/GuiScarabelli/individual---sprint2/blob/main/test
 java -jar teste-looca.jar
 
 
-chmod +x scriptProjeto.sh
+chmod +x scriptIndividual.sh

@@ -9,7 +9,7 @@ public class ComputadorDAO {
         Integer idComputador = 0;
         Computador computador = new Computador();
         public static boolean cadastrarComputador (Computador computador){
-            String sql = "INSERT INTO tbcomputador (SistemaOperacional, processador, discoTotal, memoriaTotal, qtdDiscos) " +
+            String sql = "INSERT INTO tbComputador (SistemaOperacional, processador, discoTotal, memoriaTotal, qtdDiscos) " +
                                                 "VALUES (?, ?, ?, ?, ?)";
             PreparedStatement ps = null;
             try{

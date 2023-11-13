@@ -88,6 +88,7 @@ public class App {
             String senhaLogin = entrada.nextLine();
 
             UsuarioDAO.pegarUsuario(usuario);
+            ComputadorDAO.pegarIdComputador(computador);
 
             if (!Objects.equals(emailLogin, usuario.getEmail()) || !Objects.equals(senhaLogin, usuario.getSenha())) {
                 System.out.println("usuario ou senha inválidos!");

@@ -27,7 +27,7 @@ public class ComputadorDAO {
         }
 
         public static String pegarIdComputador (Computador computador){
-            String sql = "SELECT idComputador FROM tbcomputador";
+            String sql = "SELECT idComputador FROM tbComputador";
             PreparedStatement ps = null;
             ResultSet rs = null; // ResultSet é uma classe utilizada para poder realizar os selects
             try{

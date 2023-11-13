@@ -81,14 +81,13 @@ public class App {
         computador.setQtdDiscos(qtdDicos);
 
         do {
-            UsuarioDAO.pegarUsuario(usuario);
             System.out.println("Digite o usuario: ");
             String emailLogin = entrada.nextLine();
 
             System.out.println("Digite a senha: ");
             String senhaLogin = entrada.nextLine();
 
-
+            UsuarioDAO.pegarUsuario(usuario);
 
             if (!Objects.equals(emailLogin, usuario.getEmail()) || !Objects.equals(senhaLogin, usuario.getSenha())) {
                 System.out.println("usuario ou senha inválidos!");

@@ -87,8 +87,8 @@ public class App {
             System.out.println("Digite a senha: ");
             String senhaLogin = entrada.nextLine();
 
-            UsuarioDAO.pegarUsuario(usuario);
             ComputadorDAO.pegarIdComputador(computador);
+            UsuarioDAO.pegarUsuario(usuario);
 
             if (!Objects.equals(emailLogin, usuario.getEmail()) || !Objects.equals(senhaLogin, usuario.getSenha())) {
                 System.out.println("usuario ou senha inválidos!");
@@ -127,6 +127,7 @@ public class App {
                         break;
                     case 2:
                         computador.gerarTextoInicio();
+                        ComputadorDAO.pegarIdComputador(computador);
                         StatusPcDAO.pegarIdCaptura(idCaptura);
                         break;
 

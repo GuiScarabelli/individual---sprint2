@@ -1,0 +1,13 @@
+DataAcessObject\ComputadorDAO.class
+ProgramScanner.class
+Entidades\Usuario.class
+App.class
+DataAcessObject\StatusPcDAO.class
+DataAcessObject\UsuarioDAO.class
+DataAcessObject\AlertaDAO.class
+Entidades\Computador.class
+Conexao\Conexao.class
+App$1.class
+ProgramScanner$ProgramProibidoEncontradoException.class
+Entidades\Alerta.class
+Entidades\StatusPc.class

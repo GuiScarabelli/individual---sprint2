@@ -1,0 +1,53 @@
+
+// calcular peso notebook
+ public double calcularPesoTotal() {
+        double fatorConversao = 0.1;  // Valor hipotético para ilustração
+        double pesoTotal = getPesoBase() + (tamanhoTela * fatorConversao);
+        return pesoTotal;
+    }
+
+// Calcular uso de bateria do smartphone
+ 
+public class Smartphone extends ProdutoEletronico {
+    private int capacidadeBateria; // Capacidade da bateria em mAh
+
+    // Outros atributos e métodos específicos do Smartphone
+
+    public Smartphone(String marca, String modelo, float preco, int capacidadeBateria) {
+        super(marca, modelo, preco);
+        this.capacidadeBateria = capacidadeBateria;
+    }
+
+    public double calcularUsoBateriaDiario() {
+        double consumoTotal = 0;
+
+        // Simulação de uso ativo durante 6 horas
+        consumoTotal += calcularConsumoAtivo(6);
+
+        // Simulação de uso inativo durante 10 horas
+        consumoTotal += calcularConsumoInativo(10);
+
+        // Simulação de uso em espera durante 8 horas
+        consumoTotal += calcularConsumoEmEspera(8);
+
+        return consumoTotal;
+    }
+
+    private double calcularConsumoAtivo(int horas) {
+        double consumoPorHora = 10; // Valor hipotético de consumo por hora em modo ativo
+        return consumoPorHora * horas;
+    }
+
+    private double calcularConsumoInativo(int horas) {
+        double consumoPorHora = 2; // Valor hipotético de consumo por hora em modo inativo
+        return consumoPorHora * horas;
+    }
+
+    private double calcularConsumoEmEspera(int horas) {
+        double consumoPorHora = 1; // Valor hipotético de consumo por hora em modo em espera
+        return consumoPorHora * horas;
+    }
+
+}
+
+   

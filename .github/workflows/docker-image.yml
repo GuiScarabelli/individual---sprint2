@@ -1,4 +1,4 @@
-name: Auto DB Image Adera
+name: Auto DB Image PixelWatchers
 on:
   push:
     branches:

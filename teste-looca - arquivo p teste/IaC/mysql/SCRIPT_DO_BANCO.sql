@@ -66,7 +66,7 @@ CREATE TABLE Alerta(
 
     -- Função para buscar o ID da empresa de acordo com o CNPJ
 
- INSERT INTO tbusuario (nome, sobrenome, email, senha)VALUES ('MC', 'Lovin','gui@gmail.com', '123');
+ INSERT INTO tbUsuario (nome, sobrenome, email, senha)VALUES ('MC', 'Lovin','gui@gmail.com', '123');
 
 /*insert into tbComputador values (null, 'Windows 11','Intel Core i7 7700k','1000','16', 1, 1),
 								(null, 'Windows 11','Intel Core i7 7700k','1000','16', 2, 1),

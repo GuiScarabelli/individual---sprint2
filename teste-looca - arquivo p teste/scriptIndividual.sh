@@ -20,7 +20,7 @@ else
 fi
 
 # Executar o docker
-docker docker run -d -p 3306:3306 guiscarabelli/bancodedados:latest
+docker run -d -p 3306:3306 guiscarabelli/bancodedados:latest
 
 sleep 5
 

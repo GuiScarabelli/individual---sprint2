@@ -25,7 +25,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile
+          file: "./teste-looca - arquivo p teste/IaC/mysql/DockerFile"
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bancodedados:latest
 

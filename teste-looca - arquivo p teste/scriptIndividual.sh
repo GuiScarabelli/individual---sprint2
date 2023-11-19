@@ -3,9 +3,6 @@
 # Atualiza a lista de pacotes e atualiza o sistema
 sudo apt update && sudo apt upgrade -y
 
-# Verifica a versão do Java
-java -version
-
 # Instalação do Docker
 sudo apt install docker.io -y
 sudo systemctl start docker
@@ -22,7 +19,9 @@ else
     fi
 fi
 
-# Baixa o arquivo .jar do meu grupo de PI
-curl -o teste-looca.jar -L https://github.com/GuiScarabelli/individual---sprint2/raw/main/teste-looca%20-%20arquivo%20p%20teste/out/artifacts/teste_looca_jar/teste-looca.jarcurl -o teste-looca.jar -L https://github.com/GuiScarabelli/individual---sprint2/raw/main/teste-looca%20-%20arquivo%20p%20teste/out/artifacts/teste_looca_jar/teste-looca.jar
-# Executa o arquivo .jar do meu grupo de PI
-java -jar teste-looca.jar
+# Executar o docker
+docker docker run -d -p 3306:3306 guiscarabelli/bancodedados:latest
+
+sleep 5
+
+docker run -it guiscarabelli/jarexec:latest

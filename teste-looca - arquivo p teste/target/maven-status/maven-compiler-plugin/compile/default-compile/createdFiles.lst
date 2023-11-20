@@ -5,9 +5,14 @@ App.class
 DataAcessObject\StatusPcDAO.class
 DataAcessObject\UsuarioDAO.class
 DataAcessObject\AlertaDAO.class
+Entidades\Arena.class
 Entidades\Computador.class
 Conexao\Conexao.class
+DataAcessObject\ArenaDAO.class
+Entidades\ArquivosPastasProibidos.class
 App$1.class
 ProgramScanner$ProgramProibidoEncontradoException.class
+IdentificadorUnico.class
+DataAcessObject\ArquivosPastasProibidosDAO.class
 Entidades\Alerta.class
 Entidades\StatusPc.class

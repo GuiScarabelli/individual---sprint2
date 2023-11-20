@@ -25,6 +25,4 @@ public class Conexao {
             return null;
         }
     }
-    // Se a conexão for nula, ele cria a conexão passando a URL, usuario e senha, caso contrário ele
-    // retorna a conexão
 }

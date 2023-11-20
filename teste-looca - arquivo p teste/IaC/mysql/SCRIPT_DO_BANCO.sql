@@ -80,7 +80,7 @@ CREATE TABLE PastasProibidas (
 );
 
 -- Função para buscar o ID da empresa de acordo com o CNPJ
-DELIMITER $$
+/*DELIMITER $$
 CREATE FUNCTION fn_empresa(fnCnpj char(18))
     RETURNS int
     deterministic
@@ -90,7 +90,7 @@ BEGIN
 return(vId);
 END$$;
 DELIMITER ;
-
+*/
 -- INSERT INTO tbusuario (nome, sobrenome, email, senha)VALUES ('MC', 'Lovin','gui@gmail.com', '123');
 
 /*insert into tbComputador values (null, 'Windows 11','Intel Core i7 7700k','1000','16', 1, 1),

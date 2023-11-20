@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class UsuarioDAO {
     public static String pegarUsuario (Usuario usuario){
-        String sql = "SELECT idUsuario, nome, sobrenome, email, senha FROM tbusuario";
+        String sql = "SELECT idUsuario, nome, sobrenome, email, senha FROM tbUsuario";
         PreparedStatement ps = null;
         ResultSet rs = null; // ResultSet é uma classe utilizada para poder realizar os selects
         try{

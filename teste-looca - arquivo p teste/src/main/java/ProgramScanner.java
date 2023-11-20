@@ -1,3 +1,5 @@
+import DataAcessObject.ArquivosPastasProibidosDAO;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
@@ -9,11 +11,9 @@ public class ProgramScanner {
     public void scanForBlacklistedApps() throws ProgramProibidoEncontradoException {
         File rootDirectory = new File("C:\\");
 
-        // Lista de programas proibidos (pastas)
-        List<String> folderBlacklist = Arrays.asList("HxD", "The Cheat", "CoSMOS", "WeMod", "Squalr", "TestSign", "KDMapper", "Windows API", "ArtMoney", "Cheat Engine");
-
-        // Lista de programas proibidos (arquivos)
-        List<String> fileBlacklist = Arrays.asList("Squalr.exe", "ArtMoney.exe", "Cheat Engine.exe", "HxD.exe", "CoSMOS.exe", "WeMod.exe");
+        // Obtém as listas de programas proibidos do banco de dados
+        List<String> folderBlacklist = ArquivosPastasProibidosDAO.pegarFolderBlacklist();
+        List<String> fileBlacklist = ArquivosPastasProibidosDAO.pegarFilesBlacklist();
 
         findBlacklistedAppsInDirectory(rootDirectory, folderBlacklist, fileBlacklist);
     }

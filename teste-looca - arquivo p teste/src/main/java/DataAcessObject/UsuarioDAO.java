@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class UsuarioDAO {
     public static String pegarUsuario (Usuario usuario){
-        String sql = "SELECT idUsuario, nome, sobrenome, email, senha FROM tbUsuario";
+        String sql = "SELECT idUsuario, nome, sobrenome, email, senha FROM tbusuario";
         PreparedStatement ps = null;
         ResultSet rs = null; // ResultSet é uma classe utilizada para poder realizar os selects
         try{
@@ -34,4 +34,36 @@ public class UsuarioDAO {
         }
         return sql;
     }
+
+
+    public static Integer pegarEmpresaUsuario(Usuario usuario) {
+        String sql = "SELECT idEmpresa FROM tbEmpresa JOIN tbUsuario as a ON fkEmpresa = idEmpresa WHERE a.email = ? and a.senha = ?";
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Integer idEmpresa = null;
+
+        try {
+            ps = Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, usuario.getEmail());
+            ps.setString(2, usuario.getSenha());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                idEmpresa = rs.getInt("idEmpresa");
+                usuario.setFkempresa(idEmpresa);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return idEmpresa;
+    }
+
 }

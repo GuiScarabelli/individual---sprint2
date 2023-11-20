@@ -3,7 +3,7 @@ package Entidades;
 import com.github.britooo.looca.api.util.Conversor;
 
 public class Computador {
-        private Integer id;
+        private String id;
         private String SO;
         private Long memoriaTot;
         private String processador;
@@ -16,10 +16,10 @@ public class Computador {
                 """);
         }
 
-        public int getId() {
+        public String getId() {
             return this.id;
         }
-        public void setId(int id) {
+        public void setId(String id) {
             this.id = id;
         }
 

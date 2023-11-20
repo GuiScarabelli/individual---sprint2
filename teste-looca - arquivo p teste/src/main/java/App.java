@@ -1,7 +1,4 @@
-import DataAcessObject.AlertaDAO;
-import DataAcessObject.ComputadorDAO;
-import DataAcessObject.StatusPcDAO;
-import DataAcessObject.UsuarioDAO;
+import DataAcessObject.*;
 import Entidades.*;
 import com.github.britooo.looca.api.core.Looca;
 import com.github.britooo.looca.api.group.discos.DiscoGrupo;
@@ -10,11 +7,22 @@ import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.sistema.Sistema;
 import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.util.Conversor;
+import oshi.SystemInfo;
+import oshi.hardware.HardwareAbstractionLayer;
+import oshi.hardware.CentralProcessor;
+import oshi.hardware.Sensors;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.lang.management.ManagementFactory;
+import java.lang.management.OperatingSystemMXBean;
+import java.time.LocalDateTime;
+import java.util.*;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
-import java.time.LocalDateTime;
-import java.util.*;
 
 public class App {
     public static void main(String[] args) {
@@ -39,8 +47,7 @@ public class App {
                 ||                                                            \s                            ||  
                 ||                                                                                         ||
                 +==========================================================================================+
-
-                                """);
+                """);
 
         // objetos que foram criados na mão
         Looca looca = new Looca();
@@ -54,7 +61,6 @@ public class App {
         Scanner entrada = new Scanner(System.in);
         Alerta alerta = new Alerta();
         boolean autenticado = false;
-
 
         // Objetos do looca
         Memoria memoria = looca.getMemoria();
@@ -81,7 +87,6 @@ public class App {
         computador.setQtdDiscos(qtdDicos);
 
         do {
-            ComputadorDAO.cadastrarComputador(computador);
             System.out.println("Digite o usuario: ");
             String emailLogin = entrada.nextLine();
 
@@ -89,13 +94,10 @@ public class App {
             String senhaLogin = entrada.nextLine();
 
             UsuarioDAO.pegarUsuario(usuario);
-
             if (!Objects.equals(emailLogin, usuario.getEmail()) || !Objects.equals(senhaLogin, usuario.getSenha())) {
                 System.out.println("usuario ou senha inválidos!");
             } else {
-                ComputadorDAO.pegarIdComputador(computador);
                 System.out.println("Usuário encontrado!");
-
                 System.out.println("""
                     +=============================================+
                     ||                                           ||   
@@ -127,11 +129,89 @@ public class App {
 
                         break;
                     case 2:
-                        computador.gerarTextoInicio();
-                        StatusPcDAO.pegarIdCaptura(idCaptura);
+                        UsuarioDAO.pegarEmpresaUsuario(usuario);
+                        ArenaDAO.pegarArenasDaEmpresa(usuario);
+                        if (ArenaDAO.pegarArenasDaEmpresa(usuario).isEmpty()){
+                            System.out.println("Você ainda não tem uma arena cadastrada, acesse nosso site para fazer isso");
+                            return;
+                        }
+                        else {
+                            String idPC = IdentificadorUnico.GerarId();
+                            if (!ComputadorDAO.JaExiste(idPC)){
+                                System.out.println();
+                                System.out.println("Parece que essa é a primeira vez que você utiliza o Sentinel nesse PC");
+                                System.out.println("Em qual arena você deseja cadastrar esse computador?");
+                                System.out.println();
+                                for (int i = 0; i < ArenaDAO.pegarArenasDaEmpresa(usuario).size(); i++) {
+                                    if (i == ArenaDAO.pegarArenasDaEmpresa(usuario).size()-1){
+                                        System.out.println("""
+                                +----------------------------------------------------
+                                | %d - %s
+                                +----------------------------------------------------"""
+                                                .formatted(i + 1, ArenaDAO.pegarArenasDaEmpresa(usuario).get(i)));
+                                    }
+                                    else {
+                                        System.out.println("""
+                                +----------------------------------------------------
+                                | %d - %s""".formatted(i + 1, ArenaDAO.pegarArenasDaEmpresa(usuario).get(i)));
+                                    }
+                                }
+                                Integer numArena = entrada.nextInt();
+                                String nomeArena = ArenaDAO.pegarArenasDaEmpresa(usuario).get(numArena - 1);
+
+                                System.out.println("Certo, agora dê um apelido para esse computador");
+                                entrada.nextLine();
+                                String nomePC = entrada.nextLine();
+                                ComputadorDAO.cadastrarComputador(computador, idPC, nomeArena, nomePC);
+                            }
+                        }
                         break;
 
                 }
+
+
+                UsuarioDAO.pegarEmpresaUsuario(usuario);
+                ArenaDAO.pegarArenasDaEmpresa(usuario);
+                if (ArenaDAO.pegarArenasDaEmpresa(usuario).isEmpty()){
+                    System.out.println("Você ainda não tem uma arena cadastrada, acesse nosso site para fazer isso");
+                    return;
+                }
+                else {
+                    String idPC = IdentificadorUnico.GerarId();
+                    if (!ComputadorDAO.JaExiste(idPC)){
+                        System.out.println();
+                        System.out.println("Parece que essa é a primeira vez que você utiliza o Sentinel nesse PC");
+                        System.out.println("Em qual arena você deseja cadastrar esse computador?");
+                        System.out.println();
+                        for (int i = 0; i < ArenaDAO.pegarArenasDaEmpresa(usuario).size(); i++) {
+                            if (i == ArenaDAO.pegarArenasDaEmpresa(usuario).size()-1){
+                                System.out.println("""
+                                +----------------------------------------------------
+                                | %d - %s
+                                +----------------------------------------------------"""
+                                        .formatted(i + 1, ArenaDAO.pegarArenasDaEmpresa(usuario).get(i)));
+                            }
+                            else {
+                                System.out.println("""
+                                +----------------------------------------------------
+                                | %d - %s""".formatted(i + 1, ArenaDAO.pegarArenasDaEmpresa(usuario).get(i)));
+                            }
+                        }
+                        Integer numArena = entrada.nextInt();
+                        String nomeArena = ArenaDAO.pegarArenasDaEmpresa(usuario).get(numArena - 1);
+
+                        System.out.println("Certo, agora dê um apelido para esse computador");
+                        entrada.nextLine();
+                        String nomePC = entrada.nextLine();
+                        ComputadorDAO.cadastrarComputador(computador, idPC, nomeArena, nomePC);
+                    }
+                }
+
+                computador.gerarTextoInicio();
+                ComputadorDAO.pegarIdComputador(computador);
+                StatusPcDAO.pegarIdCaptura(idCaptura);
+                StatusPcDAO.exibirInformacoesMaquina(nomeProcessador, sistemaOperacional, memoriaTotal, discoTotal, qtdDicos);
+
                 Integer pontosMontagem = disco.getVolumes().size();
                 long TEMPO = (2000);
                 Timer timer = new Timer();
@@ -151,12 +231,26 @@ public class App {
                             Long discoEmUso = disco.getVolumes().get(0).getDisponivel();
                             discoDisponivel.setDiscoDisponivel(discoEmUso);
 
+                            // Crie uma instância do SystemInfo
+                            SystemInfo systemInfo = new SystemInfo();
+
+                            // Obtenha a camada de abstração de hardware
+                            HardwareAbstractionLayer hardware = systemInfo.getHardware();
+
+                            // Obtenha as informações do sensor
+                            Sensors sensors = hardware.getSensors();
+
+                            // Obtenha a temperatura do processador
+                            Double cpuTemperature = sensors.getCpuTemperature();
+                            processadorUso.setTempProcessador(cpuTemperature);
+
                             StatusPcDAO.cadastrarCapturas(memoriaUso, processadorUso, discoDisponivel, dtHoraCaptura, computador);
 
                             if (disco.getVolumes().size() > pontosMontagem){
                                 System.out.println("ATENÇÃO!\nDISCO DESCONHECIDO CONECTADO ");
                             } else {
                                 System.out.println("QUANTIDADE DE DISCOS ESTÁ DE ACORDO :)");
+
                             }
 
 
@@ -167,7 +261,6 @@ public class App {
                 };
                 timer.scheduleAtFixedRate(tarefa, TEMPO, TEMPO);
                 autenticado = true;
-
 
                 ProgramScanner programScanner = new ProgramScanner();
 
@@ -182,14 +275,27 @@ public class App {
 
                     LocalDateTime data = LocalDateTime.now();
                     alerta.setDtHoraAlerta(String.valueOf(data));
-                    alerta.setDescricao("Arquivo suspeito encontrado");
-                    alerta.setCaminhoAqrquivo(programScanner.getAbsoluteFilePath());
-                    AlertaDAO.cadastrarAlerta(alerta, computador);
+                    alerta.setCaminhoArquivo(programScanner.getAbsoluteFilePath());
+
+                    String tipoAlerta;
+                    if (e.getMessage().startsWith("Pasta proibida")) {
+                        tipoAlerta = "Pasta Proibida";
+                        alerta.setDescricao("Pasta proibida encontrada");
+                    } else if (e.getMessage().startsWith("Arquivo proibido")) {
+                        tipoAlerta = "Arquivo Proibido";
+                        alerta.setDescricao("Arquivo proibido encontrado");
+                    } else {
+                        tipoAlerta = "Desconhecido";
+                        alerta.setDescricao("Alerta desconhecido encontrado");
+                    }
+
+                    // Aqui deve ser o id do computador
+                    AlertaDAO.cadastrarAlerta(alerta, computador, tipoAlerta);
 
                     System.out.println("CADASTROU O ALERTA DE ARQUIVO OU PASTA PROIBIDA");
                 }
-
             }
+
         } while(!autenticado);
 
         // Caminho da raiz do disco (pode variar dependendo do sistema operacional)

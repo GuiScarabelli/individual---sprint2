@@ -17,6 +17,9 @@ public class ArenaDAO {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
+        PreparedStatement psSQLServer = null;
+        ResultSet rsSQLServer = null;
+
         try {
             ps = Conexao.getConexao().prepareStatement(sql);
             ps.setInt(1, usuario.getFkempresa()); // Configurar parâmetro após a criação do PreparedStatement
@@ -24,6 +27,15 @@ public class ArenaDAO {
 
             while (rs.next()) {
                 String nomeArena = rs.getString("nomeArena");
+                arenasEmpresa.add(nomeArena);
+            }
+
+            psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
+            psSQLServer.setInt(1, usuario.getFkempresa()); // Configurar parâmetro após a criação do PreparedStatement
+            rsSQLServer = psSQLServer.executeQuery();
+
+            while (rsSQLServer.next()) {
+                String nomeArena = rsSQLServer.getString("nomeArena");
                 arenasEmpresa.add(nomeArena);
             }
 

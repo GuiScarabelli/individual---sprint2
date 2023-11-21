@@ -11,7 +11,7 @@ public class Conexao {
 
     private static final String urlSQLServer = "jdbc:sqlserver://ec2-54-159-156-118.compute-1.amazonaws.com:1433;database=prj_sprint;encrypt=false;trustServerCertificate=true;";
     private static final String userSQLServer = "sa";
-    private static final String passwordSQLServer = "123";
+    private static final String passwordSQLServer = "f";
     private static Connection conn; // objeto p/ conexão utilizando a classe Connection
     private static Connection connSQLServer;
 

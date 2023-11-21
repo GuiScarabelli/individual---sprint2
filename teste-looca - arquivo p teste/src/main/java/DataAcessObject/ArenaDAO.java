@@ -18,7 +18,7 @@ public class ArenaDAO {
         ResultSet rs = null;
 
         try {
-            ps = Conexao.getConexaoSQLServer().prepareStatement(sql);
+            ps = Conexao.getConexao().prepareStatement(sql);
             ps.setInt(1, usuario.getFkempresa()); // Configurar parâmetro após a criação do PreparedStatement
             rs = ps.executeQuery();
 

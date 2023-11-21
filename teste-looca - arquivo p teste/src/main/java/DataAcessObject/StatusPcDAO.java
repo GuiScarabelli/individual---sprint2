@@ -58,8 +58,6 @@ public class StatusPcDAO {
                 "(memoriaUso, processadorUso, discoDisponivel, tempProcessador, dtHoraCaptura, fkComputador) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
-        PreparedStatement psSQLServer = null;
-
         try {
             ps = Conexao.getConexao().prepareStatement(sql);
             ps.setLong(1, statusMemoria.getMemoriaUso());
@@ -69,15 +67,6 @@ public class StatusPcDAO {
             ps.setString(5, dtHora.getDtHoraCaptura());
             ps.setString(6, computador.getId());
             ps.execute();
-
-//            psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
-//            psSQLServer.setLong(1, statusMemoria.getMemoriaUso());
-//            psSQLServer.setDouble(2, statusProcessador.getProcessadorEmUso());
-//            psSQLServer.setDouble(3, Disco.getDiscoDisponivel());
-//            psSQLServer.setDouble(4, statusProcessador.getTempProcessador());
-//            psSQLServer.setString(5, dtHora.getDtHoraCaptura());
-//            psSQLServer.setString(6, computador.getId());
-//            psSQLServer.execute();
 
             String dataFormatadaa = dtHora.getDtHoraCaptura();
             Date dataAtual = new Date();

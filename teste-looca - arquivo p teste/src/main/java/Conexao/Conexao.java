@@ -8,7 +8,12 @@ public class Conexao {
     private static final String url = "jdbc:mysql://172.17.0.2:3306/prj_sprint";
     private static final String user = "root";
     private static final String password = "123";
+
+    private static final String urlSQLServer = "jdbc:sqlserver://ec2-54-159-156-118.compute-1.amazonaws.com:1433;database=prj_sprint;encrypt=false;trustServerCertificate=true;";
+    private static final String userSQLServer = "sa";
+    private static final String passwordSQLServer = "123";
     private static Connection conn; // objeto p/ conexão utilizando a classe Connection
+    private static Connection connSQLServer;
 
 
     // Método para verificar se a conexao foi bem sucedida
@@ -19,6 +24,20 @@ public class Conexao {
                 return conn;
             }else {
                 return conn;
+            }
+        } catch (SQLException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static Connection getConexaoSQLServer(){
+        try {
+            if (connSQLServer == null){
+                connSQLServer = DriverManager.getConnection(urlSQLServer, userSQLServer, passwordSQLServer);
+                return connSQLServer;
+            }else {
+                return connSQLServer;
             }
         } catch (SQLException e){
             e.printStackTrace();

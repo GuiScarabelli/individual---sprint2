@@ -12,7 +12,7 @@ public class ComputadorDAO {
             String sql = "INSERT INTO tbComputador VALUES (?, ?, ?, ?, ?, ?, ?, (select idArena from tbArena where nomeArena = ?))";
             PreparedStatement ps = null;
             try{
-                ps = Conexao.getConexao().prepareStatement(sql);
+                ps = Conexao.getConexaoSQLServer().prepareStatement(sql);
                 ps.setString(1,idUnico);
                 ps.setString(2, nomePC);
                 ps.setString(3, computador.getSO());
@@ -34,7 +34,7 @@ public class ComputadorDAO {
             PreparedStatement ps = null;
             ResultSet rs = null; // ResultSet é uma classe utilizada para poder realizar os selects
             try{
-                ps = Conexao.getConexao().prepareStatement(sql);
+                ps = Conexao.getConexaoSQLServer().prepareStatement(sql);
                 rs = ps.executeQuery();
                 while(rs.next()) { // o  next é para ele mover para a prox. linha
                    computador.setId(rs.getString(1));
@@ -52,7 +52,7 @@ public class ComputadorDAO {
         ResultSet rs = null;
 
         try {
-            ps = Conexao.getConexao().prepareStatement(sql);
+            ps = Conexao.getConexaoSQLServer().prepareStatement(sql);
             ps.setString(1, idUnico);
 
             rs = ps.executeQuery();

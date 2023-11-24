@@ -23,14 +23,14 @@ public class ArquivosPastasProibidosDAO {
         ResultSet rsSQLServer = null;
 
         try {
-            ps = Conexao.getConexao().prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                String nomePasta = rs.getString("nomePasta");
-                arquivoPasta.setNomePasta(nomePasta);
-                folderBlacklist.add(nomePasta);
-            }
+//            ps = Conexao.getConexao().prepareStatement(sql);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                String nomePasta = rs.getString("nomePasta");
+//                arquivoPasta.setNomePasta(nomePasta);
+//                folderBlacklist.add(nomePasta);
+//            }
 
             psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
             rsSQLServer = psSQLServer.executeQuery();
@@ -41,7 +41,7 @@ public class ArquivosPastasProibidosDAO {
                 folderBlacklist.add(nomePasta);
             }
 
-            ps.execute();
+//            ps.execute();
 
             psSQLServer.execute();
         } catch (SQLException e) {
@@ -62,14 +62,14 @@ public class ArquivosPastasProibidosDAO {
         ResultSet rsSQLServer = null;
 
         try {
-            ps = Conexao.getConexao().prepareStatement(sql);
-            rs = ps.executeQuery();
-
-            while (rs.next()) {
-                String nomeArquivo = rs.getString("nomeArquivo");
-                arquivoPasta.setNomeArquivo(nomeArquivo);
-                filesBlacklist.add(nomeArquivo);
-            }
+//            ps = Conexao.getConexao().prepareStatement(sql);
+//            rs = ps.executeQuery();
+//
+//            while (rs.next()) {
+//                String nomeArquivo = rs.getString("nomeArquivo");
+//                arquivoPasta.setNomeArquivo(nomeArquivo);
+//                filesBlacklist.add(nomeArquivo);
+//            }
 
             psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
             rsSQLServer = psSQLServer.executeQuery();
@@ -80,7 +80,7 @@ public class ArquivosPastasProibidosDAO {
                 filesBlacklist.add(nomeArquivo);
             }
 
-            ps.execute();
+//            ps.execute();
 
             psSQLServer.execute();
         } catch (SQLException e) {

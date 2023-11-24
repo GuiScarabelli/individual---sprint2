@@ -7,6 +7,7 @@ import com.github.britooo.looca.api.group.memoria.Memoria;
 import com.github.britooo.looca.api.group.sistema.Sistema;
 import com.github.britooo.looca.api.group.processador.Processador;
 import com.github.britooo.looca.api.util.Conversor;
+import com.mysql.cj.protocol.a.LocalDateTimeValueEncoder;
 import oshi.SystemInfo;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.hardware.CentralProcessor;
@@ -17,6 +18,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.management.ManagementFactory;
 import java.lang.management.OperatingSystemMXBean;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -219,8 +222,9 @@ public class App {
                     @Override
                     public void run() {
                         try {
-                            LocalDateTime data = LocalDateTime.now();
-                            dtHoraCaptura.setDtHoraCaptura(String.valueOf(data));
+                            //YYYY-MM-
+                            String dataParaInserir = "2023-11-23";
+                            dtHoraCaptura.setDtHoraCaptura(dataParaInserir);
 
                             Long memoriaEmUso = memoria.getEmUso();
                             memoriaUso.setMemoriaUso(memoriaEmUso);
@@ -244,7 +248,7 @@ public class App {
                             Double cpuTemperature = sensors.getCpuTemperature();
                             processadorUso.setTempProcessador(cpuTemperature);
 
-                            StatusPcDAO.cadastrarCapturas(memoriaUso, processadorUso, discoDisponivel, dtHoraCaptura, computador);
+                            StatusPcDAO.cadastrarCapturas(memoriaUso, processadorUso, discoDisponivel, processadorUso.getTempProcessador(), dtHoraCaptura, computador);
 
                             if (disco.getVolumes().size() > pontosMontagem){
                                 System.out.println("ATENÇÃO!\nDISCO DESCONHECIDO CONECTADO ");

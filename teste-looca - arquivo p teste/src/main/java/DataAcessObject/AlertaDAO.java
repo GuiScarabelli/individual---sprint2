@@ -16,12 +16,12 @@ public class AlertaDAO {
         PreparedStatement ps = null;
         PreparedStatement psSQLServer = null;
         try {
-            ps = Conexao.getConexao().prepareStatement(sql);
-            ps.setString(1, alerta.getDescricao());
-            ps.setString(2, alerta.getDtHoraAlerta());
-            ps.setString(3, alerta.getCaminhoArquivo());
-            ps.setString(4, tipoAlerta);  // Tipo de alerta (Pasta ou Arquivo)
-            ps.setString(5, computador.getId());
+//            ps = Conexao.getConexao().prepareStatement(sql);
+//            ps.setString(1, alerta.getDescricao());
+//            ps.setString(2, alerta.getDtHoraAlerta());
+//            ps.setString(3, alerta.getCaminhoArquivo());
+//            ps.setString(4, tipoAlerta);  // Tipo de alerta (Pasta ou Arquivo)
+//            ps.setString(5, computador.getId());
 
             psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
             psSQLServer.setString(1, alerta.getDescricao());

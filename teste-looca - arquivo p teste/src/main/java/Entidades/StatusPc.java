@@ -1,5 +1,10 @@
 package Entidades;
 
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+
 public class StatusPc {
     private Integer idCaptura;
     private Double processadorEmUso;
@@ -45,6 +50,7 @@ public class StatusPc {
     }
 
     public void setDtHoraCaptura(String dtHoraCaptura) {
+
         this.dtHoraCaptura = dtHoraCaptura;
     }
 

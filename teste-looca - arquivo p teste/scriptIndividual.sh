@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # Atualiza a lista de pacotes e atualiza o sistema
 sudo apt update && sudo apt upgrade -y
 
@@ -8,6 +7,11 @@ sudo apt install docker.io -y
 sudo systemctl start docker
 sudo systemctl enable docker
 
+docker build -t guiscarabelli/bancodedados:latest .
+
+cd teste-looca\ -\ arquivo\ p\ teste/IaC/mysql
+
+docker buid -t guiscarabelli/bancodedados:latest .
 # Verifica se o Java não está instalado e, se não estiver, solicita a instalação
 if [ $? -eq 0 ]; then
     echo "Java instalado"

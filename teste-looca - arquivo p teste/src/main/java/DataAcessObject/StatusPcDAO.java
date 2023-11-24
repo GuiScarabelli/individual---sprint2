@@ -7,10 +7,9 @@ import com.github.britooo.looca.api.util.Conversor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class StatusPcDAO {
@@ -41,7 +40,7 @@ public class StatusPcDAO {
         PreparedStatement ps = null;
         ResultSet rs = null; // ResultSet é uma classe utilizada para poder realizar os selects
         try{
-            ps = Conexao.getConexao().prepareStatement(sql);
+            ps = Conexao.getConexaoSQLServer().prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()) { // o  next é para ele mover para a prox. linha
                 statusPc.setIdCaptura(rs.getInt(1));
@@ -52,23 +51,25 @@ public class StatusPcDAO {
         }
         return sql;
     }
-    public static void cadastrarCapturas( StatusPc statusMemoria, StatusPc statusProcessador, StatusPc Disco,
-                                         StatusPc dtHora, Computador computador) {
+    public static void cadastrarCapturas(StatusPc statusMemoria, StatusPc statusProcessador, StatusPc Disco,
+                                         Double cpuTemperature, StatusPc dtHora, Computador computador) {
         String sql = "INSERT INTO status_pc " +
                 "(memoriaUso, processadorUso, discoDisponivel, tempProcessador, dtHoraCaptura, fkComputador) " +
                 "VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
         try {
-            ps = Conexao.getConexao().prepareStatement(sql);
+            String dataParaInserir = "2023-11-23";
+
+            ps = Conexao.getConexaoSQLServer().prepareStatement(sql);
             ps.setLong(1, statusMemoria.getMemoriaUso());
             ps.setDouble(2, statusProcessador.getProcessadorEmUso());
             ps.setDouble(3, Disco.getDiscoDisponivel());
             ps.setDouble(4, statusProcessador.getTempProcessador());
-            ps.setString(5, dtHora.getDtHoraCaptura());
+            ps.setString(5, dataParaInserir);
             ps.setString(6, computador.getId());
             ps.execute();
 
-            String dataFormatadaa = dtHora.getDtHoraCaptura();
+            String dataFormatadaa = String.valueOf(dtHora.getDtHoraCaptura());
             Date dataAtual = new Date();
             // Definir o formato desejado
             SimpleDateFormat formato = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");

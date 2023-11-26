@@ -37,6 +37,7 @@ public class Conexao {
 
     public static Connection getConexaoSQLServer(){
         try {
+            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             if (connSQLServer == null){
                 connSQLServer = DriverManager.getConnection(urlSQLServer, userSQLServer, passwordSQLServer);
                 return connSQLServer;
@@ -46,6 +47,8 @@ public class Conexao {
         } catch (SQLException e){
             e.printStackTrace();
             return null;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 }

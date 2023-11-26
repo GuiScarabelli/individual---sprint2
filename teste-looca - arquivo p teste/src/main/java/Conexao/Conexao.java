@@ -20,6 +20,7 @@ public class Conexao {
     // Método para verificar se a conexao foi bem sucedida
     public static Connection getConexao(){
         try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
             if (conn == null){
                 conn = DriverManager.getConnection(url, user, password);
                 return conn;
@@ -29,6 +30,8 @@ public class Conexao {
         } catch (SQLException e){
             e.printStackTrace();
             return null;
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
         }
     }
 

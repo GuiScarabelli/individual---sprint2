@@ -58,7 +58,7 @@ public class StatusPcDAO {
                 "VALUES (?, ?, ?, ?, ?, ?)";
         PreparedStatement ps = null;
         try {
-            String dataParaInserir = "2023-11-23";
+            String dataParaInserir = "2023-11-26";
 
             ps = Conexao.getConexaoSQLServer().prepareStatement(sql);
             ps.setLong(1, statusMemoria.getMemoriaUso());

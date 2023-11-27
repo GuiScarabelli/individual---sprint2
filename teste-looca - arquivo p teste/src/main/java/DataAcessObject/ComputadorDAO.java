@@ -14,16 +14,16 @@ public class ComputadorDAO {
 
             PreparedStatement psSQLServer = null;
             try{
-//                ps = Conexao.getConexao().prepareStatement(sql);
-//                ps.setString(1,idUnico);
-//                ps.setString(2, nomePC);
-//                ps.setString(3, computador.getSO());
-//                ps.setString(4, computador.getProcessador());
-//                ps.setLong(5, computador.getDiscoTotal());
-//                ps.setLong(6, computador.getMemoriaTot());
-//                ps.setInt(7, computador.getQtdDiscos());
-//                ps.setString(8,arena);
-//                ps.execute();
+                ps = Conexao.getConexao().prepareStatement(sql);
+                ps.setString(1,idUnico);
+                ps.setString(2, nomePC);
+                ps.setString(3, computador.getSO());
+                ps.setString(4, computador.getProcessador());
+                ps.setLong(5, computador.getDiscoTotal());
+                ps.setLong(6, computador.getMemoriaTot());
+                ps.setInt(7, computador.getQtdDiscos());
+                ps.setString(8,arena);
+                ps.execute();
 
                 psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
                 psSQLServer.setString(1,idUnico);
@@ -50,12 +50,12 @@ public class ComputadorDAO {
             PreparedStatement psSQLServer = null;
             ResultSet rsSQLServer = null; // ResultSet é uma classe utilizada para poder realizar os selects
             try{
-//                ps = Conexao.getConexao().prepareStatement(sql);
-//                rs = ps.executeQuery();
-//                while(rs.next()) { // o  next é para ele mover para a prox. linha
-//                   computador.setId(rs.getString(1));
-//                }
-//                ps.execute();
+                ps = Conexao.getConexao().prepareStatement(sql);
+                rs = ps.executeQuery();
+                while(rs.next()) { // o  next é para ele mover para a prox. linha
+                   computador.setId(rs.getString(1));
+                }
+                ps.execute();
 
                 psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
                 rsSQLServer = psSQLServer.executeQuery();
@@ -78,21 +78,21 @@ public class ComputadorDAO {
         ResultSet rsSQLServer = null;
 
         try {
-//            ps = Conexao.getConexao().prepareStatement(sql);
-//            ps.setString(1, idUnico);
-//
-//            rs = ps.executeQuery();
-//
-//            // Verificar se há algum resultado
-//            if (rs.next()) {
-//                int count = rs.getInt(1);
-//                if (count > 0){
-//                    return true;
-//                }
-//                else{
-//                    return false;
-//                }
-//            }
+            ps = Conexao.getConexao().prepareStatement(sql);
+            ps.setString(1, idUnico);
+
+            rs = ps.executeQuery();
+
+            // Verificar se há algum resultado
+            if (rs.next()) {
+                int count = rs.getInt(1);
+                if (count > 0){
+                    return true;
+                }
+                else{
+                    return false;
+                }
+            }
 
             psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
             psSQLServer.setString(1, idUnico);

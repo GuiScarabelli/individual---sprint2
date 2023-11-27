@@ -5,9 +5,9 @@ import java.sql.SQLException;
 
 public class Conexao {
     //Atributos para conexão do banco de dados
-    private static final String url = "jdbc:mysql://localhost:3306/prj_sprint";
+    private static final String url = "jdbc:mysql://172.117.0.2/prj_sprint";
     private static final String user = "root";
-    private static final String password = "";
+    private static final String password = "123";
 
     private static final String urlSQLServer = "jdbc:sqlserver://ec2-54-159-156-118.compute-1.amazonaws.com:1433;database=prj_sprint" +
             ";encrypt=false;trustServerCertificate=true;";
@@ -20,7 +20,6 @@ public class Conexao {
     // Método para verificar se a conexao foi bem sucedida
     public static Connection getConexao(){
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
             if (conn == null){
                 conn = DriverManager.getConnection(url, user, password);
                 return conn;
@@ -30,8 +29,6 @@ public class Conexao {
         } catch (SQLException e){
             e.printStackTrace();
             return null;
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
         }
     }
 

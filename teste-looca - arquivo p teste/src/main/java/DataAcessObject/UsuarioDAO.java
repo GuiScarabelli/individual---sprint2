@@ -26,15 +26,15 @@ public class UsuarioDAO {
             }
             ps.execute();
 
-            psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
-            rsSQLServer = psSQLServer.executeQuery();
-            while(rsSQLServer.next()) { // o  next é para ele mover para a prox. linha
-                usuario.setIdUsuario(rsSQLServer.getInt(1));
-                usuario.setNome(rsSQLServer.getString(2));
-                usuario.setSobrenome(rsSQLServer.getString(3));
-                usuario.setEmail(rsSQLServer.getString(4));
-                usuario.setSenha(rsSQLServer.getString(5));
-            }
+//            psSQLServer = Conexao.getConexaoSQLServer().prepareStatement(sql);
+//            rsSQLServer = psSQLServer.executeQuery();
+//            while(rsSQLServer.next()) { // o  next é para ele mover para a prox. linha
+//                usuario.setIdUsuario(rsSQLServer.getInt(1));
+//                usuario.setNome(rsSQLServer.getString(2));
+//                usuario.setSobrenome(rsSQLServer.getString(3));
+//                usuario.setEmail(rsSQLServer.getString(4));
+//                usuario.setSenha(rsSQLServer.getString(5));
+//            }
 //            System.out.println(String.format("""
 //                        Dados do usuário
 //                        id: %d
@@ -42,7 +42,7 @@ public class UsuarioDAO {
 //                        email: %s
 //                        senha: %s
 //                        """, usuario.getIdUsuario(), usuario.getNome(), usuario.getEmail(), usuario.getSenha()));
-            psSQLServer.execute();
+//            psSQLServer.execute();
         } catch (SQLException e ){
             e.printStackTrace();
         }
@@ -60,7 +60,7 @@ public class UsuarioDAO {
         Integer idEmpresa = null;
 
         try {
-            ps = Conexao.getConexaoSQLServer().prepareStatement(sql);
+            ps = Conexao.getConexao().prepareStatement(sql);
             ps.setString(1, usuario.getEmail());
             ps.setString(2, usuario.getSenha());
             rs = ps.executeQuery();
